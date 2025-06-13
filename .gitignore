@@ -1,1 +1,30 @@
 goal.txt
+
+# Virtual environment folders
+myenv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Bytecode and cache
+*.egg-info/
+*.eggs/
+*.egg
+*.pyo
+*.pyd
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# IDE/editor config files (optional)
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
