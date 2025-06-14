@@ -67,8 +67,6 @@ def submit():
     conn.commit()
     conn.close()
 
-    return redirect('/')
-
 @app.route('/admin')
 def admin():
     conn = sqlite3.connect('database.db')
