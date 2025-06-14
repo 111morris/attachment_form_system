@@ -66,6 +66,7 @@ def submit():
     ''', data)
     conn.commit()
     conn.close()
+    return redirect('/')
 
 @app.route('/admin')
 def admin():
