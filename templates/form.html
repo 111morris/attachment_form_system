@@ -93,6 +93,11 @@
         document.getElementById("location"),
       );
 
+      autocomplete.addListener("place_change", () => {
+        const place = autocomplete.getPlace();
+        if (!place.geometry) return;
+      });
+
       window.initMap = initMap;
     </script>
   </body>
