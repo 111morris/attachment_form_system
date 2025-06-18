@@ -3,6 +3,22 @@ import sqlite3
 
 app = Flask(__name__)
 
+def insert_submission(data): 
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS submissions (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            full_name TEXT,
+            student_id TEXT,
+            program TEXT,
+            location TEXT,
+            lat REAL,
+            lng REAL
+        )
+    ''')
+    conn.commit()
+    conn.close
 def init_db():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
