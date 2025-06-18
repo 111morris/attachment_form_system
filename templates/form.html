@@ -96,6 +96,9 @@
       autocomplete.addListener("place_change", () => {
         const place = autocomplete.getPlace();
         if (!place.geometry) return;
+
+        map.setCenter(place.geometry.location);
+        placeMarker(place.geometry.location);
       });
 
       window.initMap = initMap;
