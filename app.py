@@ -18,7 +18,17 @@ def insert_submission(data):
         )
     ''')
     conn.commit()
-    conn.close
+    conn.close() 
+
+def get_all_submissions():
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM submissions')
+    entries = c.fetchall()
+    conn.close()
+    return entries
+
+
 def init_db():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
