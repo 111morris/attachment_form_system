@@ -97,8 +97,7 @@
         const place = autocomplete.getPlace();
         if (!place.geometry) return;
 
-        map.setCenter(place.geometry.location);
-        placeMarker(place.geometry.location);
+        map.setCenter();
       });
 
       window.initMap = initMap;
