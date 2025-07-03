@@ -6,6 +6,12 @@ from flask import Flask, request, redirect, render_template, send_from_directory
 import sqlite3
 
 app = Flask(__name__)
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB limit
+
 
 def insert_submission(data): 
     conn = sqlite3.connect('database.db')
