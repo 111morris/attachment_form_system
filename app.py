@@ -51,21 +51,30 @@ def form():
     return render_template('form.html')
 
 @app.route('/submit', methods=['POST'])
+@app.route('/submit', methods=['POST'])
 def submit():
-    data = (
-        request.form['full_name'],
-        request.form['student_id'],
-        request.form['program'],
-        request.form['location'],
-        request.form['lat'],
-        request.form['lng']
-    )
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
-    c.execute('INSERT INTO submissions (full_name, student_id, program, location, lat, lng) VALUES (?, ?, ?, ?, ?, ?)', data)
-    conn.commit()
-    conn.close()
+    try:
+        data = (
+            request.form['full_name'],
+            request.form['student_id'],
+            request.form['program'],
+            request.form['location'],
+            float(request.form['lat']),
+            float(request.form['lng'])
+        )
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()
+        c.execute('''
+            INSERT INTO submissions (full_name, student_id, program, location, lat, lng)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', data)
+        conn.commit()
+    except Exception as e:
+        print(f"Error inserting data: {e}")
+    finally:
+        conn.close()
     return redirect('/')
+
 
 @app.route('/admin')
 def admin():
