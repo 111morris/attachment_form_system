@@ -95,3 +95,15 @@ def submit():
     return redirect('/')
 
 
+@app.route('/admin')
+def admin():
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM submissions')
+    entries = c.fetchall()
+    conn.close()
+    return render_template('admin.html', entries=entries)
+
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True)
