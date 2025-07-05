@@ -6,6 +6,11 @@ from flask import Flask, request, redirect, render_template, send_from_directory
 import sqlite3
 
 app = Flask(__name__)
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'docx'}
 
@@ -89,17 +94,4 @@ def submit():
         conn.close()
     return redirect('/')
 
-
-@app.route('/admin')
-def admin():
-    conn = sqlite3.connect('database.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM submissions')
-    entries = c.fetchall()
-    conn.close()
-    return render_template('admin.html', entries=entries)
-
-if __name__ == '__main__':
-    init_db()
-    app.run(debug=True)
 
